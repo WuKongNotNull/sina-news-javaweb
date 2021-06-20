@@ -1,4 +1,4 @@
-package com.wukong.news_management;
+package com.wukong.servlet;
 
 import java.io.*;
 import javax.servlet.http.*;
@@ -11,6 +11,7 @@ public class HelloServlet extends HttpServlet {
     public void init() {
         message = "Hello World!";
     }
+
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
