@@ -13,6 +13,23 @@
 * banner 764 * 199
 * 侧边图  150 * 93
 
+# git 版本管理
+
+## 创建main
+* GitHub 上创建远程仓库 ç
+* git clone  https://github.com/WuKongNotNull/sina-news-javaweb.git
+* cd sina-news-javaweb
+* git remote -v
+* git remote add origin https://github.com/WuKongNotNull/sina-news-javaweb.git
+* git status
+* git add .
+* git commit -m ""
+* git push -u origin main
+## 创建分支
+* git branch
+* git checkout -b test
+* git push -u origin test
+
 # 计划
 
 ## v1.0 分支
