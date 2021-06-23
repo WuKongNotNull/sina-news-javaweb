@@ -1,7 +1,10 @@
-package com.wukong.util;
-/* author: 悟空非空也（B站/知乎/公众号） */
+package com.wukong.util;/*
+author: 悟空非空也（B站/知乎/公众号） 
+*/
 
-
+/**
+ * 工具类 和数据mysql进行交互
+ */
 import com.wukong.pojo.User;
 
 import java.sql.*;
@@ -9,11 +12,11 @@ import java.util.ArrayList;
 
 
 public class JdbcUtil {
-   private Connection connection;
-   private PreparedStatement preparedStatement;
+    private Connection connection;
+    private PreparedStatement preparedStatement;
     private ResultSet resultSet;
 
-     // 连接数据库 jdbc  java database  connection
+    // 连接数据库 jdbc  java database  connection
     public boolean getConnection()  {
         // 读出配置信息  com.mysql.jdbc.Driver
         String driver = "com.mysql.cj.jdbc.Driver";
@@ -36,18 +39,13 @@ public class JdbcUtil {
 
     // 代码的重构
     public  boolean addDeleteModify(String sql,Object[] params){
-        /*
-        INSERT INTO qq_user(username,`password`,email,hobbies)VALUES(?,?,?,?)
-        delete from qq_user where id = ?
-
-         */
         if(this.getConnection()){
             try {
                 preparedStatement = connection.prepareStatement(sql);
                 //给占位符赋值
                 if(params!=null){
                     for (int i = 0; i < params.length; i++) {
-                       // preparedStatement.setString(1,params[0]);
+                        // preparedStatement.setString(1,params[0]);
                         preparedStatement.setObject((i+1), params[i]);
 
                     }
@@ -140,3 +138,4 @@ public class JdbcUtil {
 
 
 }
+

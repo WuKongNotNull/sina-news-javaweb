@@ -1,12 +1,7 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="com.wukong.pojo.User" %>
-<%
-    System.out.println("输出标记");
-    String path = request.getContextPath();
-    System.out.println("my ContextPath is " + path);
-    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-    System.out.println(" my basePath is " + basePath);
-%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,23 +20,38 @@
     <div class="main-top">
         <div class="logo"><a href=""><span>新浪新闻平台</span></a></div>
         <span>
-                    <%
-                        if (session != null) {
-                            User loginUser = (User) session.getAttribute("loginUser");
-                            if (loginUser != null) {
-                                String username = loginUser.getUsername();
-                                out.print("欢迎您，"+username);
-                            }else  {
-                                out.print("请登录");
-                            }
-                        }
-                    %>
-            </span>
+            <%
+                User user = (User) session.getAttribute("userKey");
+                if (user != null) {
+                    out.print("欢迎您，  "+user.getUsername());
+                }else {
+                    out.print("请登录");
+                }
+
+
+            %>
+        </span>
         <div class="login-box">
+            <%
+                String username = "" ;
+                String password = "" ;
+                Cookie[] cookies = request.getCookies();
+
+                for (Cookie cookie: cookies) {
+                    if (cookie.getName().equals("usernameKey")) {
+                        username = cookie.getValue();
+                    }
+                    if (cookie.getName().equals("passwordKey")) {
+                        password = cookie.getValue();
+                    }
+                }
+
+            %>
             <form action="<%=request.getContextPath()%>/LoginServlet" method="post">
-                <label for="usernameId">用户名<input  id="usernameId" type="text" name="uname" value="" placeholder="请输入用户名" /></label>
-                <label for="passwordId">密码<input id="passwordId" type="text" name="upassword"  placeholder="请输入密码"/></label>
-                <button type="submit"> 登陆</button>
+                <label for="usernameId">用户名<input  id="usernameId" type="text" name="uname" value="<%= username %>" placeholder="请输入用户名" /></label>
+                <label for="passwordId">密码<input id="passwordId" type="password" name="upassword"  value="<%=password %>" placeholder="请输入密码"/></label>
+                <button type="submit"> 登录</button>
+                <label><input type="checkbox" name="rememberMe" value="1">记住我</label>
             </form>
 
 
@@ -52,7 +62,7 @@
                 <li><a href="#">首页</a></li>
                 <li><a href="#">新浪博客</a></li>
                 <li><a href="#">新浪微博</a></li>
-                <li><a href="#">用户注册</a></li>
+                <li><a href="<%= request.getContextPath()  %>/pages/userCreate.jsp" target="_blank">用户注册</a></li>
                 <li><a href="<%= request.getContextPath() %>/LogoutServlet">用户退出</a></li>
             </ul>
         </div>
@@ -227,10 +237,27 @@
     </div>
 </div>
 <!--页面底部-->
+<%
+    // 统计网页被点击量是多少 application
+    // out  request response session application page pageContext config  exception 成为jsp的内置对象
+    // request session application page  当做存储空间： setAttribute()/ getAttribute() ； 生命周期和作用域
+    Integer count = (Integer) application.getAttribute("countKey");
+
+    if(count == null) {
+        // 当首次访问该页面
+        count = 1;
+    }else{
+        count +=1;
+
+    }
+    application.setAttribute("countKey",count);
+
+%>
 <div id="footer" class="main-footer-box">
     24小时客户服务热线：010-12345678 常见问题解答 新闻热线：010-12345678<br />
     文明办网文明上网举报电话：010-010-12345678 举报邮箱：1390128154@qq.com<br />
     CopyRight&copy;2021-2099 News China gov,All Right Reserved.<br />
     新闻中心版权所有
+    网站首页访问量：<span><%= (Integer) application.getAttribute("countKey") %></span>
 </div>
 </body></html>
