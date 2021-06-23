@@ -1,10 +1,10 @@
-package com.wukong.servlet;/*
+package com.wukong.servlet.user;/*
 author: 悟空非空也（B站/知乎/公众号） 
 */
 
 import com.wukong.pojo.User;
-import com.wukong.service.UserService;
-import com.wukong.service.UserServiceImpl;
+import com.wukong.service.user.UserService;
+import com.wukong.service.user.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

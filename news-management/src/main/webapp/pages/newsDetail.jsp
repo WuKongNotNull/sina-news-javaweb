@@ -1,16 +1,10 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML>
 <html>
   <head>
-    <base href="<%=basePath%>">
-    
-    <title>新闻详情页</title>
+      <title>新浪新闻详情页</title>
 	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/common.css">
   </head>
 <body>
@@ -18,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div id="header">
     <!--页面顶部-->
     <div class="main-top">
-        <div class="logo"><a href=""><span>新闻大视野</span></a></div>
+        <div class="logo"><a href=""><span>新浪新闻详情</span></a></div>
         <div class="login-box">
         	<%
         	 Object objUser =session.getAttribute("user");
@@ -86,9 +80,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="left-box-header"><h3>最新新闻</h3></div>
                     <div class="left-box-content">
                         <ul>
-                            <li><a href="#">课工场最靠谱的互联网教育 Java Web从入门到成就！</a></li>
-                            <li><a href="#">课工场最靠谱的互联网教育 Java Web从入门到成就！</a></li>
-                            <li><a href="#">课工场最靠谱的互联网教育 Java Web从入门到成就！</a></li>
+                            <li><a href="#">神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
+                            <li><a href="#">神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
+                            <li><a href="#">神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
                         </ul>
                     </div>
                 </div>
@@ -101,9 +95,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="left-box-header"><h3>最新评论</h3></div>
                     <div class="left-box-content">
                         <ul>
-                            <li><a href="#">课工场最靠谱的互联网教育 Java Web从入门到成就！</a></li>
-                            <li><a href="#">课工场最靠谱的互联网教育 Java Web从入门到成就！</a></li>
-                            <li><a href="#">课工场最靠谱的互联网教育 Java Web从入门到成就！</a></li>
+                            <li><a href="#">神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
+                            <li><a href="#">神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
+                            <li><a href="#">神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
                         </ul>
                     </div>
                 </div>
@@ -119,11 +113,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="main-text-box-bbg">
                     <div class="article-box">
                     	<!--新闻的标题-->
-                        <%String title = "课工场\"Java Web\"高能充电";%>
-						<h1><%=title%></h1>
+						<h1><%= "文章标题  "%></h1>
                         <div class="source-bar">
-						<%String author = "小K童鞋";%>
-						发布者：<%=author%> 分类：新闻信息 更新时间：
+						发布者：<%= "管理员 "%> 分类：新闻信息 更新时间：
                         <%
                         	Date date = new Date();
                         	String time = new SimpleDateFormat("yyyy-MM-dd").format(date);
@@ -132,32 +124,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         
                         </div>
                         <div class="article-content">
-                            <span class="article-summary"><b>摘要：</b><%out.print("本课程以真实项目贯穿讲解，内容涉及Java Web环境搭建、JSP基础语法、JavaBean编程、JDBC、Servlet、过滤器与监听器、MVC，理论结合实践，边讲边练，穿插学习方法传授，真正实现Java程序从控制台到B/S结构程序的完美蜕变");%></span>
-                            <p><%out.print("各位小伙伴们~又到了一年中，自我充电的黄金期，那么好消息来了，课工场即将开启大型限时活动【0元学习璇女神Java课程】。课程价值399元，开课后即返现金399元，是现金的现哦~<br/>活动流程与返现规则<br/>1、在腾讯课堂中点击购买课程：https://ke.qq.com/course/128564#term_id=100142816 <br/>2、完成付款后请与我们的咨询老师联系：QQ1: 2518311508  QQ2: 2165881978  告知个人返现信息姓名及银行卡卡号<br/>3、根据腾讯课堂规定，返现时间最晚是在课程结束后15个工作日内，请大家注意查收<br/>4、课程开课后与咨询老师联系，提供课工场账号（没有课工场账号的童鞋，快快去注册），即可为你开通免费观看价值500元的回放视频哦~");%> </P>
+                            <span class="article-summary"><b>摘要：</b><%= " 文章摘要"%></span>
+                            <p><%="文章内容文章内容"%> </P>
                         </div>
                         <div class="comment">
                             <dl>
                                 <dt class="comment-top">
                                     <span class="fr">2011-09-25 13:33:55</span>
-                                    <b>1楼</b> <b>水上漂</b>
+                                    <b>1楼</b> <b> 悟空</b>
                                 </dt>
                                 <dd class="comment-body">
-                                    课工场，棒棒哒！
+                                    新浪网，棒棒哒！
                                 </dd>
                             </dl>
                             <dl>
                                 <dt class="comment-top">
                                     <span class="fr">2011-09-25 13:33:55</span>
-                                    <b>2楼</b> <b>拉娜</b>
+                                    <b>2楼</b> <b>猪八戒</b>
                                 </dt>
                                <dd class="comment-body">
-                                    kgc,Fighting！
+                                    新浪新浪你真浪！
                                 </dd>
                             </dl>
                         </div>
                         <div class="comment-form">
                             <div class="comment-form-header">
-                                <span>用户：Landodo</span>
+                                <span>用户：Tangseng</span>
                                 <h3>发表评论：</h3>
                             </div>
                             <div class="comment-form-content">
@@ -175,9 +167,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 <!--页面底部-->
 <div class="main-footer-box">
-    24小时客户服务热线：010-68988888 常见问题解答 新闻热线：010-627488888<br />
-    文明办网文明上网举报电话：010-627488888 举报邮箱：jubao@kgc.com.cn<br />
-    Coyright&copy;1999-2007 News China gov,All Right Reserved.<br />
+    24小时客户服务热线：010-12345678 常见问题解答 新闻热线：010-12345678<br />
+    文明办网文明上网举报电话：010-010-12345678 举报邮箱：1390128154@qq.com<br />
+    CopyRight&copy;2021-2099 News China gov,All Right Reserved.<br />
     新闻中心版权所有
 </div>
 </body>

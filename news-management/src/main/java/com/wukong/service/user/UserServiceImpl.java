@@ -1,12 +1,13 @@
-package com.wukong.service;/*
+package com.wukong.service.user;/*
 author: 悟空非空也（B站/知乎/公众号） 
 */
 
-import com.wukong.dao.UserDao;
-import com.wukong.dao.UserDaoImpl;
+import com.wukong.dao.user.UserDao;
+import com.wukong.dao.user.UserDaoImpl;
 import com.wukong.pojo.User;
 
-public class UserServiceImpl implements  UserService {
+
+public class UserServiceImpl  implements UserService{
 
     private UserDao userDao =new UserDaoImpl();
 

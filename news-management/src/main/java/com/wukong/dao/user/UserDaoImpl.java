@@ -1,5 +1,5 @@
-package com.wukong.dao;/*
-author: 悟空非空也（B站/知乎/公众号） 
+package com.wukong.dao.user;/*
+author: 悟空非空也（B站/知乎/公众号）
 */
 
 import com.wukong.pojo.User;
@@ -7,9 +7,9 @@ import com.wukong.util.JdbcUtil;
 
 import java.sql.ResultSet;
 
-public class UserDaoImpl implements  UserDao {
+public class UserDaoImpl implements UserDao {
 
-        public JdbcUtil jdbcUtil = new JdbcUtil();
+    public JdbcUtil jdbcUtil = new JdbcUtil();
 
 
     /**
@@ -23,6 +23,8 @@ public class UserDaoImpl implements  UserDao {
         Object[] params = {user.getUsername(),user.getPassword(),user.getEmail(),user.getUserType()};
         return jdbcUtil.addDeleteModify(sql, params);
     }
+
+
 
     /**
      * select count(1) from news_user where username = 'wukong2';
@@ -79,6 +81,8 @@ public class UserDaoImpl implements  UserDao {
         }catch (Exception e ){
             e.printStackTrace();
             return null;
+        }finally {
+            jdbcUtil.closeResource();
         }
         return null;
     }

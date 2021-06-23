@@ -5,7 +5,7 @@ author: 悟空非空也（B站/知乎/公众号）
 /**
  * 工具类 和数据mysql进行交互
  */
-import com.wukong.pojo.User;
+
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class JdbcUtil {
     private ResultSet resultSet;
 
     // 连接数据库 jdbc  java database  connection
-    public boolean getConnection()  {
+    private boolean getConnection()  {
         // 读出配置信息  com.mysql.jdbc.Driver
         String driver = "com.mysql.cj.jdbc.Driver";
         String url = "jdbc:mysql://127.0.0.1:3306/news?serverTimezone=GMT&characterEncoding=utf-8";
@@ -83,7 +83,6 @@ public class JdbcUtil {
      * @return
      */
     public ResultSet getObjectByParams(String sql,Object[] params){
-        ArrayList<User> userList = new ArrayList<>();
 
         if(this.getConnection()){
             try {

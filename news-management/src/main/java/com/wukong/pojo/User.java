@@ -11,8 +11,6 @@ import lombok.ToString;
  * 属性和表news_user 的字段一一对应
  *  `id`,`username`,`password`,`email`,`userType`
  */
-
-
 @Setter
 @Getter
 @ToString

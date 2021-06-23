@@ -1,4 +1,7 @@
 <%@ page import="com.wukong.pojo.User" %>
+<%@ page import="com.wukong.service.news.NewsServiceImpl" %>
+<%@ page import="com.wukong.pojo.News" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 
@@ -152,29 +155,21 @@
                     </div>
                     <div class="main-text-box-content">
                         <ul class="news-list-ul clearfix">
-                            <li><span>2021-6-20 11:30:30</span><a href="<%=request.getContextPath()%>/pages/newsDetail.jsp">神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
-                            <li><span>2021-6-20 11:30:30</span><a href="#">神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
-                            <li><span>2021-6-20 11:30:30</span><a href="#">神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
-                            <li><span>2021-6-20 11:30:30</span><a href="#">神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
-                            <li class="li-line"><span>2021-6-20 11:30:30</span><a href="#">神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
+                            <%
+                                NewsServiceImpl newsService = new NewsServiceImpl();
+                                Integer currentNo = 1;
+                                Integer pageSize = 4;
+                                List<News> newsListPages = newsService.getNewsListPages(currentNo, pageSize);
 
-                            <li><span>2021-6-20 11:30:30</span><a href="#">J神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
-                            <li><span>2021-6-20 11:30:30</span><a href="#">U神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
-                            <li><span>2021-6-20 11:30:30</span><a href="#">神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
-                            <li><span>2021-6-20 11:30:30</span><a href="#">神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
-                            <li class="li-line"><span>2021-6-20 11:30:30</span><a href="#">神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
+                                for (News news:newsListPages){ %>
+                                        <li>
+                                            <span><%=news.getCreateDate() %></span>
+                                            <a href="<%=request.getContextPath()%>/pages/newsDetail.jsp?newsId=<%=news.getId() %>" target="_blank"><%=news.getTitle() %></a>
+                                        </li>
 
-                            <li><span>2021-6-20 11:30:30</span><a href="#">神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
-                            <li><span>2021-6-20 11:30:30</span><a href="#">神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
-                            <li><span>2021-6-20 11:30:30</span><a href="#">神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
-                            <li><span>2021-6-20 11:30:30</span><a href="#">神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
-                            <li class="li-line"><span>2021-6-20 11:30:30</span><a href="#">神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
+                            <%    }
 
-                            <li><span>2021-6-20 11:30:30</span><a href="#">神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
-                            <li><span>2021-6-20 11:30:30</span><a href="#">神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
-                            <li><span>2021-6-20 11:30:30</span><a href="#">神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
-                            <li><span>2021-6-20 11:30:30</span><a href="#">神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
-                            <li class="li-line"><span>2021-6-20 11:30:30</span><a href="#">神舟十二号航天员出征仪式在酒泉卫星发射中心</a></li>
+                            %>
                         </ul>
                     </div>
                     <!--图片新闻-->

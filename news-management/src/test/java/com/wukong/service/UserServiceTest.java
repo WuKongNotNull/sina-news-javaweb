@@ -1,13 +1,15 @@
 package com.wukong.service;
 
 import com.wukong.pojo.User;
+import com.wukong.service.user.UserService;
+import com.wukong.service.user.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 
 /*
 author: 悟空非空也（B站/知乎/公众号） 
 */class UserServiceTest {
 
-    private  UserService userService = new UserServiceImpl();
+    private UserService userService = new UserServiceImpl();
 
 
     @Test
