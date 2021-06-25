@@ -17,4 +17,10 @@ public interface NewsService {
     public List<News> getNewsListPages(Integer currentNo, Integer pageSize);
 
 
+    /**
+     *  根据新闻id 获得新闻详情
+     * @param newsId
+     * @return
+     */
+    public News getNewsById(Integer newsId);
 }

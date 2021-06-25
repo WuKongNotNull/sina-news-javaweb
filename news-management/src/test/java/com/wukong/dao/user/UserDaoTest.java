@@ -2,14 +2,12 @@ package com.wukong.dao.user;/*
 author: 悟空非空也（B站/知乎/公众号） 
 */
 
-import com.wukong.dao.user.UserDao;
-import com.wukong.dao.user.UserDaoImpl;
 import com.wukong.pojo.User;
 import org.junit.jupiter.api.Test;
 
 public class UserDaoTest {
 
-    private UserDao userDao = new UserDaoImpl();
+    private final UserDao userDao = new UserDaoImpl();
 
     @Test
     public void addUser(){
@@ -34,6 +32,11 @@ public class UserDaoTest {
     public void getUserByUsernameTest(){
         User wukongUser = userDao.getUserByUsername("wukong");
         System.out.println(wukongUser);
+    }
+
+    @Test
+    public void getUserById(){
+        System.out.println(this.userDao.getUserById(1));
     }
 
 }

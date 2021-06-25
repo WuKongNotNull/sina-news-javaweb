@@ -10,13 +10,20 @@ import java.util.List;
 author: 悟空非空也（B站/知乎/公众号） 
 */class NewsDaoTest {
 
-    private NewsDao newsDao = new NewsDaoImpl();
+    private final NewsDao newsDao = new NewsDaoImpl();
 
 
     @Test
-    void getUserListPages() {
-        List<News> userListPages = this.newsDao.getNewsListPages(1, 4);
-        System.out.println(userListPages);
+    void getNewsListPages() {
+        List<News> newsListPages = this.newsDao.getNewsListPages(1, 4);
+        System.out.println(newsListPages);
 
     }
+
+
+
+   @Test
+    public void getNewsById(){
+       System.out.println(this.newsDao.getNewsById(1));
+   }
 }

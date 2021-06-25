@@ -17,4 +17,11 @@ public interface NewsDao {
     public List<News> getNewsListPages(Integer currentNum, Integer pageSize);
 
 
+    /**
+     * 在dao层，实现根据新闻id获得新闻详情
+     * @param newsId
+     * @return
+     */
+    public News getNewsById(Integer newsId);
+
 }

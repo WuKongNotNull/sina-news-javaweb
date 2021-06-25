@@ -99,7 +99,7 @@ public class JdbcUtil {
 
         }
         else {
-            System.out.println("查询过程中，连接数据库失败");
+            System.out.println("jdbc查询过程中，连接数据库失败");
             return  null;
         }
     }

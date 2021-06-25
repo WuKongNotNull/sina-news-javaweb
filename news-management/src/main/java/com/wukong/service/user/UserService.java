@@ -30,5 +30,10 @@ public interface UserService {
     public User getUserByUsernameAndPassword(String username, String password);
 
 
-
+    /**
+     * 根据用户id 获得用户信息
+     * @param id 用户id
+     * @return 返回用户对象
+     */
+    public User getUserById(Integer id);
 }

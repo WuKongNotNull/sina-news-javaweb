@@ -22,4 +22,17 @@ public class NewsServiceImpl  implements  NewsService{
         return  this.newsDao.getNewsListPages(currentNo, pageSize);
     }
 
+
+    /**
+     * 根据新闻id 获得新闻详情
+     *
+     * @param newsId
+     * @return
+     */
+    @Override
+    public News getNewsById(Integer newsId) {
+        return this.newsDao.getNewsById(newsId);
+    }
+
+
 }

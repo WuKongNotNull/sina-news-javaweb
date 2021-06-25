@@ -11,7 +11,7 @@ import java.util.List;
 
 public class NewsDaoImpl implements NewsDao {
 
-    private JdbcUtil jdbcUtil = new JdbcUtil();
+    private final JdbcUtil jdbcUtil = new JdbcUtil();
 
 
     /**
@@ -61,5 +61,51 @@ public class NewsDaoImpl implements NewsDao {
         }
 
         return  newsList;
+    }
+
+    /**
+     * 在dao层，实现根据新闻id获得新闻详情
+     *
+     * @param newsId
+     * @return
+     */
+    @Override
+    public News getNewsById(Integer newsId) {
+        String sql = "select * from news_detail where id = ?";
+        Object [] params = {newsId};
+        ResultSet resultSet = this.jdbcUtil.getObjectByParams(sql, params);
+
+        News news = new News();
+
+        try {
+            while (resultSet.next()){
+                Integer id = resultSet.getInt("id");
+                Integer categoryId = resultSet.getInt("categoryId");
+                String title = resultSet.getString("title");
+                String summary = resultSet.getString("summary");
+                String content = resultSet.getString("content");
+                String picPath = resultSet.getString("picPath");
+                Integer createBy = resultSet.getInt("createBy");
+                Date createDate = resultSet.getDate("createDate");
+                Date modifyDate = resultSet.getDate("modifyDate");
+                Integer modifyBy = resultSet.getInt("modifyBy");
+                news.setId(id);
+                news.setCategoryId(categoryId);
+                news.setTitle(title);
+                news.setSummary(summary);
+                news.setContent(content);
+                news.setPicPath(picPath);
+                news.setCreateBy(createBy);
+                news.setCreateDate(createDate);
+                news.setModifyDate(modifyDate);
+                news.setModifyBy(modifyBy);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            jdbcUtil.closeResource();
+        }
+        return news;
     }
 }

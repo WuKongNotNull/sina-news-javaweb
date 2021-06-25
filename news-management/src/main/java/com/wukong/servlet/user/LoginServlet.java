@@ -25,8 +25,17 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("uname");
         String password = request.getParameter("upassword");
         String rememberMe = request.getParameter("rememberMe");
-        //TODO 对用户名和密码进行非空判断 （以后补充）
 
+        //对用户名和密码进行非空判断
+        if (username ==null || password ==null || username.equals("") || password.equals("")){
+
+            //给浏览器返回一个提示信息："用户名或密码不能为空"
+            // 临时空间 request 生命周期 一次请求响应
+            request.setAttribute("login_username_password_not_null","用户名或密码不能为空");
+            // 页面跳转： 一定要用请求转发，因为它是一次请求
+            request.getRequestDispatcher("/index.jsp").forward(request,response);
+
+        }
 
 
         // 调用 service 中的方法 user 为null 表示 登录失败 为not null 表示该用户确实存在

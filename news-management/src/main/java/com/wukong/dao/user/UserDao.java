@@ -27,4 +27,13 @@ public interface UserDao {
      * @return
      */
     public User getUserByUsername(String username);
+
+
+    /**
+     * 根据id获得用户对象
+     * @param id 用户id
+     * @return 用户对象
+     */
+    public User getUserById(Integer id);
+
 }

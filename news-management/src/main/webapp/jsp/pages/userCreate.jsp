@@ -48,7 +48,7 @@
 		<tr>
 			<td style="text-align:center;" colspan="2">				
 				<button type="submit" class="page-btn" name="save">注册</button>
-				<button type="button" class="page-btn" name="return" onclick="javascript:location.href='<%=request.getContextPath() %>/index.jsp'">返回</button>
+				<button type="button" class="page-btn" name="return" onclick="javascript:location.href='../../index.jsp'">返回</button>
 			</td>
 		</tr>
 	</table>
