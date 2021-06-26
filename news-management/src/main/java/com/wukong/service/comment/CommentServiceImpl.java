@@ -25,6 +25,20 @@ public class CommentServiceImpl implements CommentService{
     }
 
     /**
+     * 分页查询评论列表
+     *
+     * @param pageNo   页码
+     * @param pageSize 页容量
+     * @return 评论列表
+     */
+    @Override
+    public List<Comment> getCommentListPages(Integer pageNo, Integer pageSize) {
+
+        return  this.commentDao.getCommentListPages(pageNo,pageSize);
+
+    }
+
+    /**
      * 添加评论信息
      *
      * @param comment 评论对象
@@ -33,5 +47,17 @@ public class CommentServiceImpl implements CommentService{
     @Override
     public boolean addComment(Comment comment) {
         return this.commentDao.addComment(comment);
+    }
+
+    /**
+     * 获得评论列表
+     *
+     * @return 返回评论列表
+     */
+    @Override
+    public List<Comment> getCommentList() {
+
+        return  this.commentDao.getCommentList();
+
     }
 }

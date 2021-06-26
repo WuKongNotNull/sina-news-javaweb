@@ -73,4 +73,88 @@ public class CommentDaoImpl implements CommentDao{
         };
         return this.jdbcUtil.addDeleteModify(sql, params);
     }
+
+    /**
+     * 获得评论列表
+     *
+     * @return 返回评论列表
+     */
+    @Override
+    public List<Comment> getCommentList() {
+        String sql = "select * from news_comment order by createDate desc";
+        Object [] params = {};
+        ResultSet resultSet = this.jdbcUtil.getObjectByParams(sql, params);
+
+        List<Comment> commentList = new ArrayList<>();
+
+        try {
+            while (resultSet.next()){
+                Integer id = resultSet.getInt("id");
+                Integer newsId1 = resultSet.getInt("newsId");
+                String content = resultSet.getString("content");
+                Date createDate = resultSet.getDate("createDate");
+                Integer createBy = resultSet.getInt("createBy");
+                Date modifyDate = resultSet.getDate("modifyDate");
+                Integer modifyBy = resultSet.getInt("modifyBy");
+                Comment comment = new Comment();
+                comment.setId(id);
+                comment.setNewsId(newsId1);
+                comment.setContent(content);
+                comment.setCreateDate(createDate);
+                comment.setCreateBy(createBy);
+                comment.setModifyDate(modifyDate);
+                comment.setModifyBy(modifyBy);
+                commentList.add(comment);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            this.jdbcUtil.closeResource();
+        }
+        return commentList;
+
+    }
+
+    /**
+     * 分页查询评论列表
+     *
+     * @param pageNo   页码
+     * @param pageSize 页容量
+     * @return 评论列表
+     */
+    @Override
+    public List<Comment> getCommentListPages(Integer pageNo, Integer pageSize) {
+        String sql = "select * from news_comment order by createDate desc limit ?,?";
+        Object [] params = {(pageNo-1)*pageSize,pageSize};
+        ResultSet resultSet = this.jdbcUtil.getObjectByParams(sql, params);
+        List<Comment> commentList = new ArrayList<>();
+
+        try {
+            while (resultSet.next()){
+                Integer id = resultSet.getInt("id");
+                Integer newsId1 = resultSet.getInt("newsId");
+                String content = resultSet.getString("content");
+                Date createDate = resultSet.getDate("createDate");
+                Integer createBy = resultSet.getInt("createBy");
+                Date modifyDate = resultSet.getDate("modifyDate");
+                Integer modifyBy = resultSet.getInt("modifyBy");
+                Comment comment = new Comment();
+                comment.setId(id);
+                comment.setNewsId(newsId1);
+                comment.setContent(content);
+                comment.setCreateDate(createDate);
+                comment.setCreateBy(createBy);
+                comment.setModifyDate(modifyDate);
+                comment.setModifyBy(modifyBy);
+                commentList.add(comment);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            this.jdbcUtil.closeResource();
+        }
+        return commentList;
+    }
 }

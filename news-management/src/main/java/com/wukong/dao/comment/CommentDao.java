@@ -22,4 +22,19 @@ public interface CommentDao {
      * @return true|false 添加成功|添加失败
      */
    public boolean addComment(Comment comment);
+
+    /**
+     *  获得评论列表
+     * @return 返回评论列表
+     */
+    List<Comment> getCommentList();
+
+    /**
+     * 分页查询评论列表
+     *
+     * @param pageNo   页码
+     * @param pageSize 页容量
+     * @return 评论列表
+     */
+    List<Comment> getCommentListPages(Integer pageNo, Integer pageSize);
 }

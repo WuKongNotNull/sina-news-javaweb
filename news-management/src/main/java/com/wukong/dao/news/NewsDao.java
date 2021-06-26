@@ -24,4 +24,15 @@ public interface NewsDao {
      */
     public News getNewsById(Integer newsId);
 
+
+    /**
+     * 根据分类id 获得新闻列表
+     *
+     * @param categoryId 分类id
+     * @param pageNo     页码
+     * @param pageSize   页容量
+     * @return 返回新闻列表
+     */
+   public List<News> getNewsListPagesByCategoryId(Integer categoryId, Integer pageNo, Integer pageSize);
+
 }

@@ -1,6 +1,7 @@
 <%@ page import="com.wukong.service.news.NewsServiceImpl" %>
 <%@ page import="com.wukong.pojo.News" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.wukong.tool.Constant" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <!DOCTYPE html>
@@ -30,21 +31,72 @@
                 <div class="main-text-box-bbg">
 
                     <div class="main-text-box-header">
-                        <h3>即时新闻</h3>
+                        <h3>专题新闻</h3>
                     </div>
                     <div class="main-text-box-content">
                         <ul class="news-list-ul clearfix">
+
+                           <%-- <%
+                                // 方法一：直接在index.jsp文件中处理
+                                // 获得请求参数，并根据请求参数，获得新闻列表
+                                String categoryIdStr = request.getParameter("categoryId");
+                                Integer categoryIdFromServlet = null;
+                                if (categoryIdStr != null ) {
+                                    categoryIdFromServlet = Integer.parseInt(request.getParameter("categoryId"));
+                                }
+
+                                String pageNoStr = request.getParameter("pageNo");
+                                int pageNoFromServlet = 0;
+                                if (pageNoStr != null) {
+                                    pageNoFromServlet = Integer.parseInt(request.getParameter("pageNo"));
+                                }
+
+                                if (pageNoFromServlet<=0){
+                                    pageNoFromServlet=1;
+                                }
+
+                                NewsService newsService = new NewsServiceImpl();
+
+                                // 根据分类id 获得新闻列表
+                                List<News> newsListPagesFromServlet  = newsService.getNewsListPagesByCategoryId(categoryIdFromServlet,pageNoFromServlet, Constant.PAGE_SIZE);
+                                System.out.println("打印出来====》"+newsListPagesFromServlet);
+                            %>
+--%>
+
                             <%
+                                // 方法二：通过编写Servlet类，在该类中先获得新闻列表后，将新闻列表存入request容器中，在请求转发到index.jsp
+                                List<News> newsListPagesFromServlet = (List<News>) request.getAttribute("newsListPagesKey");
+                                Integer pageNoFromServlet = (Integer) request.getAttribute("pageNoKey");
+                               Integer categoryIdFromServlet = (Integer) request.getAttribute("categoryIdKey");
+
+                                List<News> newsListPages ;
+                                int currentNo = 1;
+                                Integer categoryId;
+
                                 NewsServiceImpl newsService = new NewsServiceImpl();
-                                Integer currentNo = 1;
-                                Integer pageSize = 4;
-                                List<News> newsListPages = newsService.getNewsListPages(currentNo, pageSize);
+
+                                if (newsListPagesFromServlet == null  ) {
+                                    System.out.println("首次访问 进入该 代码块");
+                                    //首次访问首页时候，默认显示国内分类下的所有新闻列表
+                                    categoryId = 1;
+                                  //  currentNo = 1;
+                                    newsListPages = newsService.getNewsListPagesByCategoryId(categoryId,currentNo, Constant.PAGE_SIZE);
+
+                                } else{
+                                    System.out.println("进入else 代码块 ");
+                                        categoryId = categoryIdFromServlet;
+                                        currentNo = pageNoFromServlet;
+                                        newsListPages = newsListPagesFromServlet;
+
+
+                                }
+
 
                                 for (News news : newsListPages) { %>
                             <li>
                                 <span><%=news.getCreateDate() %></span>
-                                <a href="<%=request.getContextPath()%>/jsp/pages/newsDetail.jsp?newsId=<%=news.getId() %>"
-                                   target="_blank"><%=news.getTitle() %>
+                                <a href="<%=request.getContextPath()%>/jsp/pages/newsDetail.jsp?newsId=<%=news.getId() %>">
+                                    <%=news.getTitle() %>
                                 </a>
                             </li>
 
@@ -74,25 +126,32 @@
                     </div>
                     <div class="page-bar">
                         <ul class="page-num-ul clearfix">
-                            <li><a href="#">上一页</a>
                             <li>
-                            <li><a href="#" class="thisclass">1</a>
+                                <a href="<%=request.getContextPath()%>/ShowNewsListPagesServlet?categoryId=<%=categoryId %>&pageNo=<%=currentNo-1%>">上一页</a>
+                            </li>
+                            <li><a href="<%=request.getContextPath()%>/ShowNewsListPagesServlet?categoryId=1&pageNo=1">1</a>
+                            </li>
+                            <li><a href="<%=request.getContextPath()%>/ShowNewsListPagesServlet?categoryId=1&pageNo=2">2</a>
+                            </li>
+                            <li><a href="<%=request.getContextPath()%>/ShowNewsListPagesServlet?categoryId=1&pageNo=3">3</a>
+                            </li>
+                            <li><a href="<%=request.getContextPath()%>/ShowNewsListPagesServlet?categoryId=1&pageNo=4">4</a>
+                            </li>
+                            <li><a href="<%=request.getContextPath()%>/ShowNewsListPagesServlet?categoryId=1&pageNo=5">5</a>
+                            </li>
                             <li>
-                            <li><a href="#">2</a>
-                            <li>
-                            <li><a href="#">3</a>
-                            <li>
-                            <li><a href="#">4</a>
-                            <li>
-                            <li><a href="#">5</a>
-                            <li>
-                            <li><a href="#">下一页</a>
-                            <li>
+                                <a id="test" href="<%=request.getContextPath()%>/ShowNewsListPagesServlet?categoryId=<%=categoryId %>&pageNo=<%=currentNo+1%>">下一页</a>
+                            </li>
                         </ul>
                         <span class="page-go-form">
-                            <label for="jumpId">跳转至<input id="jumpId" type="text" name="numkey"
-                                                          class="page-key"/></label>页<button type="submit"
-                                                                                             class="page-btn">GO</button></span>
+                            <form action="<%=request.getContextPath()%>/ShowNewsListPagesServlet">
+                                <label for="jumpId">
+                                跳转至<input id="jumpId" type="text" name="pageNo" class="page-key"/>页
+                                </label>
+                                <button id="go" type="submit" class="page-btn">GO</button>
+                            </form>
+
+                        </span>
                     </div>
                 </div>
             </div>
@@ -126,5 +185,6 @@
 
 <%--页面底部--%>
 <%@ include file="/jsp/pages/common/footer.jsp" %>
+<script src="js/jquery-3.6.0.js"></script>
 </body>
 </html>

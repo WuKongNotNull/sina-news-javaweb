@@ -54,9 +54,9 @@
 
         <div class="nav">
             <ul class="clearfix">
-                <li><a href="#">首页</a></li>
+                <li><a href="<%=request.getContextPath() %>/index.jsp">首页</a></li>
                 <li><a href="#">新浪博客</a></li>
-                <li><a href="#">新浪微博</a></li>
+                <li><a href="<%=request.getContextPath() %>/jsp/admin/login.jsp" target="_blank">管理员登录</a></li>
                 <li><a href="<%= request.getContextPath()  %>/jsp/pages/userCreate.jsp" target="_blank">用户注册</a></li>
                 <li><a href="<%= request.getContextPath() %>/LogoutServlet">用户退出</a></li>
             </ul>

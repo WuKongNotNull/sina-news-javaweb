@@ -15,10 +15,25 @@ public interface CommentService {
      */
   public  List<Comment> getCommentListByNewsId(Integer newsId);
 
+  /**
+   *  分页查询评论列表
+   * @param pageNo 页码
+   * @param pageSize 页容量
+   * @return 评论列表
+   */
+  public List<Comment> getCommentListPages(Integer pageNo, Integer pageSize);
+
     /**
      * 添加评论信息
      * @param comment 评论对象
      * @return true|false 添加成功|添加失败
      */
     boolean addComment(Comment comment);
+
+
+    /**
+     *   获得评论列表
+     * @return   返回评论列表
+     */
+    public List<Comment> getCommentList();
 }

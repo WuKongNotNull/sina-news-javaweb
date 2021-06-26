@@ -24,7 +24,7 @@ $(document).ready(function () {
             console.log(comment);
             // 将评论内容发送到服务器
             $.ajax({
-                url: "http://localhost:8080/sina/AddCommentServlet",
+                url: basePath+"/AddCommentServlet",
                 data: {"commentKey": JSON.stringify(comment)},
                 type: "POST",
                 dataType: "text",
