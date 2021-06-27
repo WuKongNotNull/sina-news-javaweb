@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 author: 悟空非空也（B站/知乎/公众号） 
 */class UserServiceTest {
 
-    private UserService userService = new UserServiceImpl();
+    private final UserService userService = new UserServiceImpl();
 
 
     @Test
@@ -35,5 +35,10 @@ author: 悟空非空也（B站/知乎/公众号）
         User user = userService.getUserByUsernameAndPassword("wukong", "wukong");
         System.out.println(user);
 
+    }
+
+    @Test
+    void getAdminUserByUsernameAndPassword(){
+        System.out.println(userService.getAdminUserByUsernameAndPassword("wukong", "wukong"));
     }
 }

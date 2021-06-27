@@ -6,16 +6,18 @@ import com.wukong.dao.user.UserDao;
 import com.wukong.dao.user.UserDaoImpl;
 import com.wukong.pojo.User;
 
+import java.util.List;
+
 
 public class UserServiceImpl  implements UserService{
 
-    private UserDao userDao =new UserDaoImpl();
+    private final UserDao userDao =new UserDaoImpl();
 
 
     /**
      * 注册用户
-     * @param user
-     * @return
+     * @param  user  user
+     * @return  boolean
      */
     public boolean addUser(User user) {
         return userDao.addUser(user);
@@ -61,6 +63,34 @@ public class UserServiceImpl  implements UserService{
     @Override
     public User getUserById(Integer id) {
        return this.userDao.getUserById(id);
+    }
+
+    /**
+     * 根据用户名和密码验证管理员用户是否存在
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @return 返回管理员用户对象
+     */
+    @Override
+    public User getAdminUserByUsernameAndPassword(String username, String password) {
+        User userByUsername = this.userDao.getUserByUsername(username);
+        if (userByUsername.getPassword().equals(password) && userByUsername.getUserType() == 0){
+            return  userByUsername;
+        }
+        return null;
+    }
+
+    /**
+     * 分页查询用户列表
+     *
+     * @param pageNo   页码
+     * @param pageSize 页容量
+     * @return 用户列表
+     */
+    public List<User> getUserListPages(Integer pageNo, Integer pageSize) {
+       return this.userDao.getUserListPages(pageNo,pageSize);
+
     }
 
 }

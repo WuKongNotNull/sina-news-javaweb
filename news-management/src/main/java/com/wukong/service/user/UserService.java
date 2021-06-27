@@ -4,14 +4,16 @@ author: 悟空非空也（B站/知乎/公众号）
 
 import com.wukong.pojo.User;
 
+import java.util.List;
+
 public interface UserService {
 
     /**
      * 注册用户
-     * @param user
-     * @return
+     * @param user user
+     * @return boolean
      */
-    public boolean addUser(User user);
+     boolean addUser(User user);
 
 
     /**
@@ -19,7 +21,7 @@ public interface UserService {
      * @param username  用户名
      * @return  true/false
      */
-    public boolean isExistUsername(String username);
+     boolean isExistUsername(String username);
 
     /**
      * 根据用户名和密码验证用户
@@ -27,7 +29,7 @@ public interface UserService {
      * @param password  客户端传过来的password
      * @return user
      */
-    public User getUserByUsernameAndPassword(String username, String password);
+     User getUserByUsernameAndPassword(String username, String password);
 
 
     /**
@@ -35,5 +37,21 @@ public interface UserService {
      * @param id 用户id
      * @return 返回用户对象
      */
-    public User getUserById(Integer id);
+     User getUserById(Integer id);
+
+    /**
+     *  根据用户名和密码验证管理员用户是否存在
+     * @param username 用户名
+     * @param password 密码
+     * @return 返回管理员用户对象
+     */
+    User getAdminUserByUsernameAndPassword(String username, String password);
+
+    /**
+     * 分页查询用户列表
+     * @param pageNo 页码
+     * @param pageSize 页容量
+     * @return 用户列表
+     */
+    List<User> getUserListPages(Integer pageNo, Integer pageSize);
 }

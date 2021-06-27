@@ -7,6 +7,8 @@ import com.wukong.util.JdbcUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDaoImpl implements UserDao {
 
@@ -31,7 +33,7 @@ public class UserDaoImpl implements UserDao {
      * select count(1) from news_user where username = 'wukong2';
      * 验证用户名是否唯一
      *
-     * @param username
+     * @param username username
      * @return 0 不存在用户； 1 用户唯一； >1 用户重名
      */
     public int verifyOnlyUsername(String username) {
@@ -124,6 +126,44 @@ public class UserDaoImpl implements UserDao {
             this.jdbcUtil.closeResource();
         }
             return user;
+
+    }
+
+    /**
+     * 分页查询用户列表
+     *
+     * @param pageNo   页码
+     * @param pageSize 页容量
+     * @return 用户列表
+     */
+    public List<User> getUserListPages(Integer pageNo, Integer pageSize) {
+        String sql = "select * from news_user order by createDate desc limit ?,?";
+        Object [] params = {(pageNo-1)*pageSize,pageSize};
+        ResultSet resultSet = this.jdbcUtil.getObjectByParams(sql, params);
+
+        ArrayList<User> userList = new ArrayList<User>();
+
+        try {
+            while (resultSet.next()){
+                Integer id = resultSet.getInt("id");
+                String username1 = resultSet.getString("username");
+                String password = resultSet.getString("password");
+                String email = resultSet.getString("email");
+                Integer userType = resultSet.getInt("userType");
+                User user = new User();
+                user.setId(id);
+                user.setUsername(username1);
+                user.setPassword(password);
+                user.setEmail(email);
+                user.setUserType(userType);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            this.jdbcUtil.closeResource();
+        }
+        return userList;
 
     }
 

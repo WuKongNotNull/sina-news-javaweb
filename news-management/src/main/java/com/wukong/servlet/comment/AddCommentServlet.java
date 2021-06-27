@@ -26,6 +26,7 @@ public class AddCommentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             // 添加评论到数据库
+            // json 字符串转换成 java对象
         String commentJsonStr = request.getParameter("commentKey");
         System.out.println("commentJsonStr-->"+commentJsonStr);
         JSONObject jsonObject = JSONObject.parseObject(commentJsonStr);

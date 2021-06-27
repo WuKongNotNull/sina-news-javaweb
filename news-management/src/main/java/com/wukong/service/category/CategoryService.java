@@ -14,4 +14,11 @@ public interface CategoryService {
      */
     public List<Category> getCategoryList();
 
+    /**
+     *  分页查询分类列表
+     * @param pageNo 页码
+     * @param pageSize 页容量
+     * @return  分类列表
+     */
+    List<Category> getCategoryListPages(Integer pageNo, Integer pageSize);
 }

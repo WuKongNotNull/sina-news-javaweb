@@ -27,22 +27,35 @@
     <%@include file="common/left.jsp"%>
 
     <div class="main-content-right">
-        <!--即时新闻-->
+        <!--分类栏目-->
         <div class="main-text-box">
             <div class="main-text-box-tbg">
                 <div class="main-text-box-bbg">
                     <form name="searchForm" id="searchForm" action="<%=request.getContextPath() %>/jsp/admin/index.jsp"
                           method="post">
                         <div>
-                            新闻分类：
-                            <label>
-                                <select name="categoryId" id="categoryId">
-                                    <option value="0">请选择</option>
+                            <%--评论分类：--%>
+                            <%--<label>
+                                <select name="categoryId">
+                                    <option value="0">全部</option>
+
+                                    <option value='1'>国内</option>
+
+                                    <option value='2'>国际</option>
+
+                                    <option value='3'>娱乐</option>
+
+                                    <option value='4'>军事</option>
+
+                                    <option value='5'>财经</option>
+
+                                    <option value='6'>天气</option>
+
                                 </select>
-                            </label>
-                            新闻标题<label for="title"><input type="text" name="title" id="title" value=''/></label>
+                            </label>--%>
+                            评论内容<label for="title"><input type="text" name="title" id="title" value=''/></label>
                             <button type="submit" class="page-btn">GO</button>
-                            <button type="button" onclick="addNews();" class="page-btn">增加</button>
+                            <button type="button" onclick="addComment();" class="page-btn">增加</button>
                             <input type="hidden" name="currentPageNo" value="1"/>
                             <input type="hidden" name="pageSize" value="10"/>
                             <input type="hidden" name="totalPageCount" value="2"/>
@@ -51,39 +64,25 @@
                     <table cellpadding="1" cellspacing="1" class="admin-list">
                         <thead>
                         <tr class="admin-list-head">
-                            <th>新闻标题</th>
+                            <th>评论标题</th>
                             <th>作者</th>
                             <th>时间</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <%
-                            // 访问index.jsp 文件，获得新闻列表
-                            NewsService newsService = new NewsServiceImpl();
-                            List<News> newsListPages = newsService.getNewsListPages(1, Constant.PAGE_SIZE);
-                            UserService userService = new UserServiceImpl();
-                            for (News news :
-                                    newsListPages) {
-                                // 循环遍历 tr 标签
-                        %>
-                                    <tr>
-                                        <td><a href='<%=request.getContextPath() %>/jsp/admin/index.jsp?id=2'><%=news.getTitle() %>
-                                        </a></td>
-                                        <%-- 将创建人id 转换成 创建人姓名--%>
-                                        <td><%=userService.getUserById(news.getCreateBy()).getUsername() %>
-                                        </td>
-                                        <td><%=news.getCreateDate() %>
-                                        </td>
-                                        <td><a href='<%=request.getContextPath() %>/jsp/admin/index.jsp?id=2'>修改</a>
-                                            <a href="javascript:if(confirm('确认是否删除此新闻？')) location='adminNewsDel.jsp?id=2'">删除</a>
-                                        </td>
-                                    </tr>
 
-                        <%    }
-
-                        %>
-
+                        <tr>
+                            <td><a href='<%=request.getContextPath() %>/jsp/admin/index.jsp?id=2'>评论标题
+                            </a></td>
+                            <td>评论作者
+                            </td>
+                            <td>发布日期
+                            </td>
+                            <td><a href='<%=request.getContextPath() %>/jsp/admin/index.jsp?id=2'>修改</a>
+                                <a href="javascript:if(confirm('确认是否删除此评论？')) location='adminNewsDel.jsp?id=2'">删除</a>
+                            </td>
+                        </tr>
 
 
                         </tbody>
@@ -105,7 +104,6 @@
         </div>
     </div>
 </div>
-<script src="<%=request.getContextPath()%>/js/jquery-3.6.0.js"></script>
-<script src="<%=request.getContextPath()%>/js/admin/index.js"></script>
+
 </body>
 </html>

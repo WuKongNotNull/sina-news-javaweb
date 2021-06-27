@@ -4,6 +4,8 @@ author: 悟空非空也（B站/知乎/公众号）
 
 import com.wukong.pojo.User;
 
+import java.util.List;
+
 public interface UserDao {
 
     /**
@@ -36,4 +38,12 @@ public interface UserDao {
      */
     public User getUserById(Integer id);
 
+    /**
+     * 分页查询用户列表
+     *
+     * @param pageNo   页码
+     * @param pageSize 页容量
+     * @return 用户列表
+     */
+    List<User> getUserListPages(Integer pageNo, Integer pageSize);
 }

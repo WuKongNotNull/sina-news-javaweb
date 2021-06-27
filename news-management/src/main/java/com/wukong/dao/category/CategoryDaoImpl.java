@@ -52,4 +52,46 @@ public class CategoryDaoImpl implements CategoryDao {
         }
             return categoryList;
     }
+
+    /**
+     * 分页查询分类列表
+     *
+     * @param pageNo   页码
+     * @param pageSize 页容量
+     * @return 分类列表
+     */
+    public List<Category> getCategoryListPages(Integer pageNo, Integer pageSize) {
+
+        String sql = "select * from news_category order by createDate desc limit ?,?";
+        Object [] params = {(pageNo-1)*pageSize,pageSize};
+        ResultSet resultSet = this.jdbcUtil.getObjectByParams(sql, params);
+
+        List<Category> categoryList = new ArrayList<>();
+        try {
+            while (resultSet.next()){
+                Integer id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                Date createDate = resultSet.getDate("createDate");
+                Integer createBy = resultSet.getInt("createBy");
+                Date modifyDate = resultSet.getDate("modifyDate");
+                Integer modifyBy = resultSet.getInt("modifyBy");
+
+                Category category = new Category();
+                category.setId(id);
+                category.setName(name);
+                category.setCreateDate(createDate);
+                category.setCreateBy(createBy);
+                category.setModifyDate(modifyDate);
+                category.setModifyBy(modifyBy);
+
+                categoryList.add(category);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            jdbcUtil.closeResource();
+        }
+        return categoryList;
+    }
 }
